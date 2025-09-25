@@ -1,12 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-# === Centralizar a logo acima do título ===
-col1, col2, col3 = st.columns([6, 10, 1])  # col1 e col3 para espaçamento, col2 para o título/logo
-with col2:
-    st.image("logobranca.png", width=160)  # Ajuste o tamanho conforme sua logo
-
-
 st.title("📊 Calculadora Meta Faturamento")
 
 mes = st.text_input("MÊS:")

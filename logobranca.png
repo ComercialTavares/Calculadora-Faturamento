@@ -1,0 +1,4 @@
+cd "C:/Users/mathe/OneDrive/Área de Trabalho/ANALISE/META-DETALHADA"
+git add logobranca.png
+git commit -m "Adiciona logo"
+git push

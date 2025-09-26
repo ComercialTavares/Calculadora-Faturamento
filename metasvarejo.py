@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import io
 
 def format_brl(valor, casas_decimais=2):
     return f"{valor:,.{casas_decimais}f}".replace(",", "X").replace(".", ",").replace("X", ".")
@@ -74,6 +75,13 @@ if st.button("Calcular"):
         
 
     }])
+    
+    # Criar buffer de memória e salvar o Excel nele
+    excel_buffer = io.BytesIO()
+    with pd.ExcelWriter(excel_buffer, engine='xlsxwriter') as writer:
+        df.to_excel(writer, index=False, sheet_name='Metas')
+    excel_buffer.seek(0)
+
     # Espaço para alinhar centralizado
     st.write("")
     st.write("")
@@ -82,8 +90,7 @@ if st.button("Calcular"):
     with btn_col2:
         st.download_button(
             label="⬇️ Exportar Excel",
-            data=df.to_csv(index=False).encode("utf-8"),
-            file_name="metas.csv",
-            mime="text/csv"
+            data=excel_buffer,
+            file_name="metas.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
-

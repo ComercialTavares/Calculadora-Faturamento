@@ -55,7 +55,7 @@ if st.button("Calcular"):
         st.markdown("<h5 style='text-align: center;'>▫️Quantidade de Vendas▫️</h5>", unsafe_allow_html=True)
         st.markdown(f"<p style='text-align: center;'>Meta Mensal Individual : {format_brl(meta_ticket_individual, 0)} Vendas</p>", unsafe_allow_html=True)
         st.markdown(f"<p style='text-align: center;'>Meta Semanal Individual : {format_brl(meta_ticket_semanal_individual, 0)} Vendas</p>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta Diária Individual : {format_brl(meta_ticket_diaria, 0)} Vendas</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Diária Individual : {format_brl(meta_ticket_diaria_individual, 0)} Vendas</p>", unsafe_allow_html=True)
 
         
 

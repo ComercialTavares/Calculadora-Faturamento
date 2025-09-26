@@ -1,5 +1,16 @@
 import streamlit as st
 import pandas as pd
+import locale
+
+
+# Configurar a localidade para o padrão brasileiro
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+
+# === Centralizar a logo acima do título ===
+col1, col2, col3 = st.columns([6, 10, 1])  # col1 e col3 para espaçamento, col2 para o título/logo
+with col2:
+    st.image("logobranca.png", width=160)  # Ajuste o tamanho conforme sua logo
+
 
 st.title("📊 Calculadora Meta Faturamento")
 
@@ -8,8 +19,10 @@ realizado = st.number_input("REALIZADO ANO ANTERIOR (R$):", min_value=0.0, step=
 meta_percentual = st.number_input("% META (%):", min_value=0.0, step=1.0)
 meta_ticket_medio = st.number_input("META TICKET MÉDIO (R$):", min_value=0.0, step=100.0)
 dias = st.number_input("DIAS À TRABALHAR:", min_value=1, step=1)
-semanas = st.number_input("QTD SEMANAS À TRABALHAR:", min_value=1, step=1)
 funcionarios = st.number_input("QTD COLABORADORES:", min_value=1, step=1)
+semanas = 4
+st.markdown(f"<p style='text-align: center;'><b>QTD SEMANAS À TRABALHAR:</b> {semanas} Semanas</p>", unsafe_allow_html=True)
+
 
 if st.button("Calcular"):
     meta_total = realizado * (1 + meta_percentual / 100)
@@ -31,25 +44,25 @@ if st.button("Calcular"):
     with col1:
         st.markdown("<h3 style='text-align: center;'>📌 Meta Loja</h3><br>", unsafe_allow_html=True)
         st.markdown("<h5 style='text-align: center;'>▫️Faturamento▫️</h5>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta total: R$ {meta_total:,.2f}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta semanal: R$ {meta_semanal:,.2f}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta diária: R$ {meta_diaria:,.2f}</p><br>", unsafe_allow_html=True)
-        st.markdown("<h5 style='text-align: center;'>▫️Quantidade de vendas▫️</h5>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta Qtd Vendas: {meta_ticketmedio:,.2f}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta Qtd Vendas semanal: {meta_ticket_semanal:,.2f}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta Qtd Vendas diária: {meta_ticket_diaria:,.2f}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Total : R$ {locale.format_string('%.2f', meta_total, grouping=True)}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Semanal : R$ {locale.format_string('%.2f', meta_semanal, grouping=True)}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Diária : R$ {locale.format_string('%.2f', meta_diaria, grouping=True)}</p><br>", unsafe_allow_html=True)
+        st.markdown("<h5 style='text-align: center;'>▫️Quantidade de Vendas▫️</h5>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Mensal : {locale.format_string('%.0f', meta_ticketmedio, grouping=True)}  Vendas</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Semanal : {locale.format_string('%.0f', meta_ticket_semanal, grouping=True)}  Vendas</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Diária : {locale.format_string('%.0f', meta_ticket_diaria, grouping=True)}  Vendas</p>", unsafe_allow_html=True)
         
 
     with col2:
         st.markdown("<h3 style='text-align: center;'>👤 Meta por Colaborador</h3><br>", unsafe_allow_html=True)
         st.markdown("<h5 style='text-align: center;'>▫️Faturamento▫️</h5>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta mensal individual: R$ {meta_mensal_individual:,.2f}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta semanal individual: R$ {meta_semanal_individual:,.2f}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta diária individual: R$ {meta_diaria_individual:,.2f}</p><br>", unsafe_allow_html=True)
-        st.markdown("<h5 style='text-align: center;'>▫️Quantidade de vendas▫️</h5>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta Qtd Vendas Individual: {meta_ticket_individual:,.2f}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta Qtd Vendas semanal Individual: {meta_ticket_semanal_individual:,.2f}</p>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center;'>Meta Qtd Vendas diária Individual: {meta_ticket_diaria:,.2f}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Mensal Individual : R$ {locale.format_string('%.2f', meta_mensal_individual, grouping=True)}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Semanal Individual : R$ {locale.format_string('%.2f', meta_semanal_individual, grouping=True)}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Diária Individual : R$ {locale.format_string('%.2f', meta_diaria_individual, grouping=True)}</p><br>", unsafe_allow_html=True)
+        st.markdown("<h5 style='text-align: center;'>▫️Quantidade de Vendas▫️</h5>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Mensal Individual : {locale.format_string('%.0f', meta_ticket_individual, grouping=True)}  Vendas</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Semanal Individual : {locale.format_string('%.0f', meta_ticket_semanal_individual, grouping=True)}  Vendas</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>Meta Diária Individual : {locale.format_string('%.0f', meta_ticket_diaria, grouping=True)}  Vendas</p>", unsafe_allow_html=True)
         
 
     # Exportar para Excel
